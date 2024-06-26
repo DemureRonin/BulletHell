@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using YG;
 
 namespace PlayerScripts
 {
@@ -12,6 +13,7 @@ namespace PlayerScripts
         public void OnPlayerDeath()
         {
             OnDie?.Invoke();
+            YandexGame.FullscreenShow();
         }
     }
 }

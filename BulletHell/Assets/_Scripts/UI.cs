@@ -12,6 +12,7 @@ public class UI : MonoBehaviour
     [SerializeField] private GameObject _tutorialContainer;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private GameObject _recordContainer;
+    [SerializeField] private GameObject _recordTextContainer;
     [SerializeField] private TextMeshProUGUI _recordText;
 
     private int _score;
@@ -63,6 +64,7 @@ public class UI : MonoBehaviour
     private void OnDie()
     {
         _recordContainer.SetActive(true);
+        _recordTextContainer.SetActive(true);
         if (_record < _score)
         {
             _record = _score;
@@ -92,6 +94,7 @@ public class UI : MonoBehaviour
         _score = 0;
         _scoreText.text = _score.ToString();
         _recordContainer.SetActive(false);
+        _recordTextContainer.SetActive(false);
         _currentHealth = 3;
         for (int i = 0; i < _currentHealth; i++)
         {

@@ -13,6 +13,8 @@ namespace PlayerScripts
         [SerializeField] private AudioSource _audio;
         [SerializeField] private AudioClip _collect;
         [SerializeField] private AudioClip _shoot;
+        [SerializeField] private GameObject _lStick;
+        [SerializeField] private GameObject _rStick;
 
 
         private Vector2 _direction;
@@ -35,6 +37,8 @@ namespace PlayerScripts
             if (Input.touches.Length > 0)
             {
                 _phoneControls = true;
+                _lStick.SetActive(true);
+                _rStick.SetActive(true);
             }
 
             if (!_phoneControls) return;
