@@ -4,6 +4,7 @@ using Components;
 using PlayerScripts;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class UI : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class UI : MonoBehaviour
     {
         _record = PlayerPrefs.GetInt("Record");
         _recordText.text = _record.ToString();
+        
+        YandexGame.NewLeaderboardScores("BulletHellLeaderboard", _record);
     }
 
     private void OnScoreChanged()
@@ -46,7 +49,7 @@ public class UI : MonoBehaviour
 
         if (health < _currentHealth)
         {
-             if (_hearts.Count == 0) return;
+            if (_hearts.Count == 0) return;
             Destroy(_hearts.Last());
             _hearts.Remove(_hearts.Last());
             _currentHealth--;
@@ -69,8 +72,10 @@ public class UI : MonoBehaviour
         {
             _record = _score;
             PlayerPrefs.SetInt("Record", _record);
+            YandexGame.SaveProgress();
+            YandexGame.NewLeaderboardScores("BulletHellLeaderboard", _record);
         }
-
+       
         _recordText.text = _record.ToString();
 
         for (int i = 0; i < _hearts.Count; i++)
@@ -78,7 +83,12 @@ public class UI : MonoBehaviour
             Destroy(_hearts.Last());
             _hearts.Remove(_hearts.Last());
         }
+
         _tutorialContainer.SetActive(true);
+        YandexGame.FullscreenShow();
+
+
+        
     }
 
     private void OnDisable()
@@ -100,6 +110,7 @@ public class UI : MonoBehaviour
         {
             _hearts.Add(Instantiate(_heartPrefab, _heartLayout.transform));
         }
+
         _tutorialContainer.SetActive(false);
     }
 }
